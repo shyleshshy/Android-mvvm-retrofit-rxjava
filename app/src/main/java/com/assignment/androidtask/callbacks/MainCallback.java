@@ -1,11 +1,12 @@
 package com.assignment.androidtask.callbacks;
 
-import com.assignment.androidtask.model.api.ResponseDummy;
+import com.assignment.androidtask.model.api.ItemsBean;
 
 import java.util.List;
 
 public interface MainCallback {
 
-    void getUpdates(List<ResponseDummy> value);
+    void getUpdates(List<ItemsBean> value);
 
+    void clearList();
 }

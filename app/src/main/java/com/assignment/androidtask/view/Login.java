@@ -42,6 +42,7 @@ public class Login extends BaseActivity<ActivityLoginBinding, LoginViewModel> im
         Intent intent = new Intent();
         intent.setClass(this,MainPage.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

@@ -4,8 +4,8 @@ import android.app.Application;
 
 import com.assignment.androidtask.api.ApiClient;
 import com.assignment.androidtask.api.ApiService;
-import com.assignment.androidtask.data.AppPreferencesHelper;
-import com.assignment.androidtask.data.PreferencesHelper;
+import com.assignment.androidtask.helper.AppPreferencesHelper;
+import com.assignment.androidtask.helper.PreferencesHelper;
 
 public class App extends Application {
 
@@ -17,7 +17,7 @@ public class App extends Application {
         super.onCreate();
 
         mPreferencesHelper = new AppPreferencesHelper(this);
-        mApiService = ApiClient.getClient(this).create(ApiService.class);
+        mApiService = ApiClient.getClient().create(ApiService.class);
     }
 
     public static PreferencesHelper getPref() {

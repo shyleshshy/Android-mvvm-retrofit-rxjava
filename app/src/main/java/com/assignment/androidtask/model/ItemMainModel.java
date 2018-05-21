@@ -1,18 +1,20 @@
 package com.assignment.androidtask.model;
 
-import com.assignment.androidtask.model.api.ResponseDummy;
+import com.assignment.androidtask.model.api.ItemsBean;
 import com.assignment.androidtask.view.base.BaseViewModel;
 
 public class ItemMainModel extends BaseViewModel {
 
     public String title;
     public String desc;
+    public String id;
 
-    private ResponseDummy dummy;
+    private ItemsBean item;
 
-    public ItemMainModel(ResponseDummy obj) {
-        dummy = obj;
-        this.title = obj.getEmail();
-        this.desc = obj.getBody();
+    public ItemMainModel(ItemsBean obj) {
+        item = obj;
+        this.title = obj.getName();
+        this.desc = String.valueOf(obj.getPrice());
+        this.id = obj.getItem_code();
     }
 }

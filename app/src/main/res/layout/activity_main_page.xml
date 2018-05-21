@@ -22,15 +22,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            app:onRefreshListener="@{() -> mainPageModel.fetchAll()}"
+            app:onRefreshListener="@{() -> mainPageModel.onRefresh()}"
             app:refreshing="@{mainPageModel.isLoading}">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvMain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="@{mainPageModel.hasFailed ? View.GONE: View.VISIBLE }"
                 app:setItemsRv="@{mainPageModel.mData}" />
         </android.support.v4.widget.SwipeRefreshLayout>
 
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Failed to fetch, please try again later"
+            android:textSize="20sp"
+            android:visibility="@{mainPageModel.hasFailed ? View.VISIBLE : View.GONE}" />
+    </RelativeLayout>
 </layout>

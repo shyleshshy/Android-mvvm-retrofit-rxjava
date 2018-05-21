@@ -1,7 +1,5 @@
 package com.assignment.androidtask.adapter;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,15 +7,15 @@ import android.view.ViewGroup;
 
 import com.assignment.androidtask.databinding.ItemMainPageBinding;
 import com.assignment.androidtask.model.ItemMainModel;
-import com.assignment.androidtask.model.api.ResponseDummy;
+import com.assignment.androidtask.model.api.ItemsBean;
 
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    private List<ResponseDummy> mList;
+    private List<ItemsBean> mList;
 
-    public MainAdapter(List<ResponseDummy> mList) {
+    public MainAdapter(List<ItemsBean> mList) {
         this.mList = mList;
     }
 
@@ -41,11 +39,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     public void clearItems() {
         mList.clear();
+        notifyDataSetChanged();
     }
 
-    public void addItems(List<ResponseDummy> aList) {
+    public void addItems(List<ItemsBean> aList) {
+        int aInitSize = mList.size();
         mList.addAll(aList);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(aInitSize, mList.size());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,29 +60,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         }
 
         public void onBind(int position) {
-            final ResponseDummy blog = mList.get(position);
+            final ItemsBean blog = mList.get(position);
             mBlogItemViewModel = new ItemMainModel(blog);
             mBinding.setViewModel(mBlogItemViewModel);
 
-            // Immediate Binding
-            // When a variable or observable changes, the binding will be scheduled to change before
-            // the next frame. There are times, however, when binding must be executed immediately.
-            // To force execution, use the executePendingBindings() method.
             mBinding.executePendingBindings();
-        }
-
-        public void onItemClick(String blogUrl) {
-            if (blogUrl != null) {
-                try {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                    intent.setData(Uri.parse(blogUrl));
-                    itemView.getContext().startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

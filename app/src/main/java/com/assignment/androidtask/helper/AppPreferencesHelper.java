@@ -1,4 +1,4 @@
-package com.assignment.androidtask.data;
+package com.assignment.androidtask.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,7 +1,5 @@
 package com.assignment.androidtask.api;
 
-import android.content.Context;
-
 import com.assignment.androidtask.Constants;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -20,10 +18,10 @@ public class ApiClient {
     private static int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
 
-    public static Retrofit getClient(Context context) {
+    public static Retrofit getClient() {
 
         if (okHttpClient == null)
-            initOkHttp(context);
+            initOkHttp();
 
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
@@ -36,16 +34,11 @@ public class ApiClient {
         return retrofit;
     }
 
-    private static void initOkHttp(final Context context) {
+    private static void initOkHttp() {
         OkHttpClient.Builder httpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS);
-
-//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-//        httpClient.addInterceptor(interceptor);
 
         httpClient.addInterceptor(new Interceptor() {
             @Override
@@ -54,12 +47,6 @@ public class ApiClient {
                 Request.Builder requestBuilder = original.newBuilder()
                         .addHeader("Accept", "application/json")
                         .addHeader("Content-Type", "application/json");
-
-                // Adding Authorization token (API Key)
-                // Requests will be denied without API key
-//                if (!TextUtils.isEmpty(PrefUtils.getApiKey(context))) {
-//                    requestBuilder.addHeader("Authorization", PrefUtils.getApiKey(context));
-//                }
 
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
