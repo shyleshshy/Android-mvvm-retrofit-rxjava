@@ -9,3 +9,8 @@ Libraries used
 ->rxAndroid
 ->retrofit
 ->gson
+
+
+# Required APIs can be found in below repositry. 
+
+https://github.com/shyleshshy/sampleProject
