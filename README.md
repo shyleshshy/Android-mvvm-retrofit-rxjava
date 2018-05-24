@@ -11,6 +11,6 @@ Libraries used
 ->gson
 
 
-# Required APIs can be found in below repositry. 
+# Required APIs can be found in the below repositry. 
 
 https://github.com/shyleshshy/sampleProject
